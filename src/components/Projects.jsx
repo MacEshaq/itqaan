@@ -3,7 +3,7 @@ import house1 from "../assets/images/house1.png";
 import house2 from "../assets/images/house2.png";
 import house3 from "../assets/images/house3.png";
 import gov1 from "../assets/images/gov1.png";
-import com1 from "../assets/images/com1.png";
+import commer1 from "../assets/images/commer1.png";
 
 // Mock dataset for architectural blueprint items
 const PROJECTS_DATA = [
@@ -49,7 +49,7 @@ const PROJECTS_DATA = [
     category: "Commercial",
     year: "2025",
     location: "Cotabato City",
-    image: com1,
+    image: commer1,
     scale: "70,000 sq ft",
   },
 ];
