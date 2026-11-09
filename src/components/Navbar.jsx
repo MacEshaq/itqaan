@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { MdConstruction } from "react-icons/md";
 import { AiFillContacts } from "react-icons/ai";
@@ -58,12 +59,12 @@ export default function Navbar({ prop_x }) {
           >
             <AiFillContacts className="text-3xl" />
           </a>
-          <a
-            href="#"
+          <NavLink
+            to="/admin"
             className="flex items-center justify-center border border-white/20 p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D]"
           >
             <RiAdminFill className="text-3xl" />
-          </a>
+          </NavLink>
           {/* Login Toggle Button */}
           <button
             onClick={toggleLogin}
@@ -122,14 +123,14 @@ export default function Navbar({ prop_x }) {
             <AiFillContacts className="text-2xl" />{" "}
             <span className="font-medium">Contact</span>
           </a>
-          <a
-            href="#"
+          <NavLink
+            to="/admin"
             onClick={() => setIsOpen(false)}
             className="flex w-11/12 items-center justify-center gap-3 border border-white/20 p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D]"
           >
             <RiAdminFill className="text-2xl" />{" "}
             <span className="font-medium">Admin</span>
-          </a>
+          </NavLink>
 
           <button
             onClick={() => {

@@ -1,11 +1,14 @@
 import React from "react";
+import UserList from "../components/UserList";
 
 // yo stopped here. add this admin page as navlink.
 
 export default function AdminDashboardContent() {
+  // console.log(UserList);
   return (
     <section className="w-full bg-[#fafafa] text-[#1a1a1a] font-sans antialiased py-10 px-6 md:px-10 selection:bg-black selection:text-white">
       {/* Maximum structural bounding box */}
+      <UserList />
       <div className="max-w-7xl mx-auto space-y-10">
         {/* Workspace Title Area */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#e5e5e5] pb-6">
