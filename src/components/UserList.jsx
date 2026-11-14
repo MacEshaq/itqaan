@@ -18,7 +18,7 @@ function UserList() {
         }
         const data = await response.json();
         // Log the fetched users to inspect the exact structure
-        console.log("Users from Express API:", data);
+        // console.log("Users from Express API:", data);
         setUsers(data);
       } catch (err) {
         setError(err.message);

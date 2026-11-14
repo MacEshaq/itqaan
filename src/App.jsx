@@ -6,22 +6,28 @@ import {
   Routes,
   RouterProvider,
 } from "react-router-dom";
-import Navbar from "./components/Navbar";
+
 import ProgressNotes from "./components/ProgressNotes";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
-import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        {/* <Route path="/admin" element={<Admin />} /> */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRole="admin">
+              <Admin />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-      <Footer />
+      {/* <Route path="/contact" element={<Contact />} /> */}
     </BrowserRouter>
   );
 }

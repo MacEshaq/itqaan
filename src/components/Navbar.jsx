@@ -1,18 +1,47 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+
+// ICONS
 import { IoHome } from "react-icons/io5";
 import { MdConstruction } from "react-icons/md";
 import { AiFillContacts } from "react-icons/ai";
 import { RiAdminFill } from "react-icons/ri";
 import { RiLoginBoxFill } from "react-icons/ri";
+import { RiLogoutBoxFill } from "react-icons/ri";
 import { HiMenu, HiX } from "react-icons/hi";
+// COMPONENTS
 import Login from "./Login"; // Imported separate login component
 
+// ASSETS
 import logo from "../assets/images/logo.png";
 
-export default function Navbar({ prop_x }) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false); //nav links state
   const [showLogin, setShowLogin] = useState(false); //login state
+
+  const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  // STEPS TO SWITCHING ICONS FROM LOGIN TO LOGOUT
+  // CREATE user state.
+  // 1- Re-check localStorage whenever the route changes (e.g., after login redirect)
+  // 2- use ternary operator inside jsx. See below button tags for switching.
+  useEffect(() => {
+    const savedUser = JSON.parse(localStorage.getItem("itqaan-user"));
+    setUser(savedUser);
+  }, [location]);
+
+  const handleLogout = () => {
+    // 1. Remove the user object & JWT token from storage
+    localStorage.removeItem("itqaan-user");
+
+    // Optional: Clear any session data if used
+    sessionStorage.clear();
+
+    // 2. Redirect to home/login and wipe the /admin route from browser history
+    navigate("/", { replace: true });
+  };
 
   const toggleLogin = (e) => {
     e.preventDefault();
@@ -59,24 +88,40 @@ export default function Navbar({ prop_x }) {
           >
             <AiFillContacts className="text-3xl" />
           </a>
-          <NavLink
-            to="/admin"
-            className="flex items-center justify-center border border-white/20 p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D]"
-          >
-            <RiAdminFill className="text-3xl" />
-          </NavLink>
+
           {/* Login Toggle Button */}
-          <button
-            onClick={toggleLogin}
-            className={`flex items-center justify-center border p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D] ${
-              showLogin
-                ? "border-[#FBC02D] text-[#FBC02D] bg-white/5"
-                : "border-white/20"
-            }`}
-            aria-label="Toggle login panel"
-          >
-            <RiLoginBoxFill className="text-3xl" />
-          </button>
+          {user ? (
+            <div className="flex items-center gap-2">
+              <NavLink
+                to="/admin"
+                className="flex items-center justify-center border border-white/20 p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D]"
+              >
+                <RiAdminFill className="text-3xl" />
+              </NavLink>
+
+              <button
+                // onClick={toggleLogin}
+                className={`flex items-center justify-center border p-2.5 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D] `}
+                aria-label="Toggle logout panel"
+                onClick={handleLogout}
+              >
+                {/* <RiLoginBoxFill className="text-3xl" /> */}
+                <RiLogoutBoxFill className="text-3xl" />
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={toggleLogin}
+              className={`flex items-center justify-center border p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D] ${
+                showLogin
+                  ? "border-[#FBC02D] text-[#FBC02D] bg-white/5"
+                  : "border-white/20"
+              }`}
+              aria-label="Toggle login panel"
+            >
+              <RiLoginBoxFill className="text-3xl" />
+            </button>
+          )}
         </div>
 
         {/* Hamburger Menu Button (Mobile Only) */}
@@ -140,7 +185,7 @@ export default function Navbar({ prop_x }) {
             className="flex w-11/12 items-center justify-center gap-3 border border-white/20 p-3 transition-colors hover:bg-white/10 hover:border-[#FBC02D] hover:text-[#FBC02D]"
           >
             <RiLoginBoxFill className="text-2xl" />{" "}
-            <span className="font-medium">Login</span>
+            <span className="font-medium">Logins</span>
           </button>
         </div>
       )}
