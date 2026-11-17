@@ -12,7 +12,7 @@ export default function Login({ onClose }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_BASE_PATH || "http://localhost:5000";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,8 +45,14 @@ export default function Login({ onClose }) {
       if (onClose) onClose();
       navigate("/admin"); //redirect to admin page once login is successfull.
     } catch (err) {
+      if (err.name === "TypeError") {
+        setErrorMsg(
+          "Unable to connect to the server. Check your internet connection.",
+        );
+      } else {
+        setErrorMsg(err.message);
+      }
       // This updates your `error` state so your red alert box renders in the UI
-      setErrorMsg(err.message);
     } finally {
       // Re-enables the Log In button whether it succeeded or failed
       setLoading(false);
