@@ -12,7 +12,7 @@ export default function Login({ onClose }) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
-  const API_URL = import.meta.env.VITE_BASE_PATH || "http://localhost:5000";
+  const API_URL = import.meta.env.VITE_BASE_PATH;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ export default function Login({ onClose }) {
     setErrorMsg(null);
 
     try {
-      const response = await fetch(`${API_URL}/login`, {
+      const response = await fetch(`${API_URL}/itqaan/server/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_name: userName, password: password }),
@@ -41,7 +41,6 @@ export default function Login({ onClose }) {
 
       localStorage.setItem("itqaan-user", JSON.stringify(data)); //json is with the token
       setUser(data);
-      console.log(data);
       if (onClose) onClose();
       navigate("/admin"); //redirect to admin page once login is successfull.
     } catch (err) {
