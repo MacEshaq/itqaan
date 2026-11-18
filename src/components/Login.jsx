@@ -20,7 +20,7 @@ export default function Login({ onClose }) {
     setErrorMsg(null);
 
     try {
-      const response = await fetch(`${API_URL}/itqaan/server/users/login`, {
+      const response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_name: userName, password: password }),
