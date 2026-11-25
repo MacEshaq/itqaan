@@ -1,7 +1,10 @@
 import { Navigate } from "react-router-dom";
 
+import { getUserWithExpiry } from "../utils/authStorage";
+
 export default function ProtectedRoute({ children, allowedRole }) {
-  const savedUser = JSON.parse(localStorage.getItem("itqaan-user"));
+  const savedUser = getUserWithExpiry();
+  // const savedUser = JSON.parse(localStorage.getItem("itqaan-user"));
 
   // 1. Block anyone who is not logged in
   if (!savedUser || !savedUser.token) {

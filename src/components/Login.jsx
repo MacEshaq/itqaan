@@ -2,13 +2,19 @@ import { useState } from "react";
 import { HiX } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
-export default function Login({ onClose }) {
-  const navigate = useNavigate();
-  const [user, setUser] = useState([]);
+import { setUserWithExpiry } from "../utils/authStorage";
+
+export default function Login({ onClose, onLoginSuccess }) {
+  const navigate = useNavigate(); //Redirects the user to /admin once authentication succeeds.
+  //const [user, setUser] = useState([]); //Stores the returned user object (though localStorage handles the actual persistence
+  //loading disables the submit button and changes its text while waiting for the server;
+  // BOOLEAN
   const [loading, setLoading] = useState(false); // 1. Start as false
+  // errorMsg stores and displays any network or validation errors.
   const [errorMsg, setErrorMsg] = useState(null);
 
   // 2. Track input values (pre-filled with your test defaults)
+  //    Controlled states that track what the user types into the input fields.
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,11 +44,15 @@ export default function Login({ onClose }) {
       }
 
       // SUCCESS LOGIN
+      setUserWithExpiry(data, 30); // Keep 1 for testing, change to 60 later
+      if (onLoginSuccess) onLoginSuccess(data);
+      navigate("/admin"); // <-- Navigate FIRST while Login is still mounted
+      if (onClose) onClose(); // <-- Close the modal AFTER
 
-      localStorage.setItem("itqaan-user", JSON.stringify(data)); //json is with the token
-      setUser(data);
-      if (onClose) onClose();
-      navigate("/admin"); //redirect to admin page once login is successfull.
+      // localStorage.setItem("itqaan-user", JSON.stringify(data)); //json is with the token
+      // setUser(data);
+      // if (onClose) onClose();
+      // navigate("/admin"); //redirect to admin page once login is successfull.
     } catch (err) {
       if (err.name === "TypeError") {
         setErrorMsg(
@@ -109,7 +119,7 @@ export default function Login({ onClose }) {
           />
         </div>
 
-        <div className="flex items-center justify-between text-xs pt-1">
+        {/* <div className="flex items-center justify-between text-xs pt-1">
           <label className="flex items-center gap-2 cursor-pointer text-white/60 hover:text-white">
             <input type="checkbox" className="accent-[#FBC02D]" />
             Remember me
@@ -117,7 +127,7 @@ export default function Login({ onClose }) {
           <a href="#" className="text-[#FBC02D] hover:underline">
             Forgot Password?
           </a>
-        </div>
+        </div> */}
 
         <button
           type="submit"

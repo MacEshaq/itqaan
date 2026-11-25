@@ -30,25 +30,6 @@ export default function Footer() {
           >
             Website
           </NavLink>
-          {/* <a
-            href="#projects"
-            className="text-[#a0a0a5] hover:text-[#fbc02d] transition-colors duration-300"
-          >
-            Projects
-          </a>
-          <a
-            href="#about"
-            className="text-[#a0a0a5] hover:text-[#fbc02d] transition-colors duration-300"
-          >
-            Contact
-          </a> */}
-          {/* <a
-            href="#hero"
-            className="text-[#a0a0a5] hover:text-[#fbc02d] transition-colors duration-300"
-          >
-            Login
-          </a> */}
-
           <a
             href="https://facebook.com"
             target="_blank"
