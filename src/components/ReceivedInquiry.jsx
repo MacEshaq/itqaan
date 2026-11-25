@@ -3,11 +3,11 @@ import React, { useState } from "react";
 const SAMPLE_DATA = [
   {
     id: "INQ-101",
-    name: "Tariq Al-Mansoor",
-    email: "t.almansoor@gulfdev.com",
-    subject: "Commercial Architecture / Mixed-Use",
+    name: "Dhen Salik",
+    email: "dhen@test.com",
+    subject: "Commercial Architecture / Office Apartment ",
     message:
-      "Planning a 14-story commercial office complex. Looking for structural engineering consultation and blueprint review.",
+      "Planning a 3-story commercial office complex. Looking for structural engineering consultation and blueprint review.",
     date: "10:15 AM",
     unread: true,
   },
@@ -126,6 +126,7 @@ export default function InquiryInbox({ initialInquiries = SAMPLE_DATA }) {
               </p>
             </div>
 
+            {/* uncomment this form if you can reply from this component to the client or email integration */}
             {/* Quick Reply
             <form
               onSubmit={sendReply}
