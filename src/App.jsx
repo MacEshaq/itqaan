@@ -1,13 +1,6 @@
-import {
-  BrowserRouter,
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  Routes,
-  RouterProvider,
-} from "react-router-dom";
-
-import ProgressNotes from "./components/ProgressNotes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
@@ -15,9 +8,9 @@ import Admin from "./pages/Admin";
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/admin" element={<Admin />} /> */}
         <Route
           path="/admin"
           element={
@@ -27,7 +20,7 @@ function App() {
           }
         />
       </Routes>
-      {/* <Route path="/contact" element={<Contact />} /> */}
+      <Footer />
     </BrowserRouter>
   );
 }

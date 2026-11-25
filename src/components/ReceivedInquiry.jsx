@@ -54,9 +54,9 @@ export default function InquiryInbox({ initialInquiries = SAMPLE_DATA }) {
   };
 
   return (
-    <div className="w-full bg-white border border-zinc-200 grid grid-cols-1 md:grid-cols-12 min-h-[500px] text-[#1a1a1d]">
+    <div className="w-full bg-white border border-zinc-200 grid grid-cols-1 md:grid-cols-12 min-h-125 text-[#1a1a1d]">
       {/* Left: Email List */}
-      <div className="md:col-span-5 border-r border-zinc-200 divide-y divide-zinc-200 overflow-y-auto max-h-[600px]">
+      <div className="md:col-span-5 border-r border-zinc-200 divide-y divide-zinc-200 overflow-y-auto max-h-125">
         {inquiries.length === 0 && (
           <p className="p-6 text-xs uppercase tracking-widest text-zinc-400 text-center">
             Inbox Empty
@@ -126,7 +126,7 @@ export default function InquiryInbox({ initialInquiries = SAMPLE_DATA }) {
               </p>
             </div>
 
-            {/* Quick Reply */}
+            {/* Quick Reply
             <form
               onSubmit={sendReply}
               className="mt-6 pt-4 border-t border-zinc-200"
@@ -152,7 +152,7 @@ export default function InquiryInbox({ initialInquiries = SAMPLE_DATA }) {
                   </button>
                 </div>
               )}
-            </form>
+            </form> */}
           </>
         ) : (
           <div className="m-auto text-xs uppercase tracking-widest text-zinc-400">
